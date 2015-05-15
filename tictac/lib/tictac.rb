@@ -5,19 +5,39 @@ class Tictac
   def initialize
     @board = [1,2,3,4,5,6,7,8,9]
     @board_value = [1,2,3,4,5,6,7,8,9]
+    @computer_board = [1,2,3,4,5,6,7,8,9]
+    @player_one = "Player 1"
+    @player_two = "Player 2"
   end
 
   def lets_play
-    @moves = 0
-    while @moves < 9
-
-    display_board
-    user_one_input
-    x_outcome
-    user_two_input
-    o_outcome
+      @moves = 0
+      puts "2 Player mode? (y/n)"
+      response = gets.chomp
+    if response == 'y'
+        puts "Player one name please >> "
+        @player_one = gets.chomp.upcase
+        puts "Player two name please >> "
+        @player_two = gets.chomp.upcase
+      while @moves < 9
+        display_board
+        user_one_input
+        x_outcome
+        user_two_input
+        o_outcome
+      end
+    else
+      puts "Player one name please >> "
+      @player_one = gets.chomp.upcase
+      @player_two = "Computer"
+      while @moves < 9
+      display_board
+      user_one_input
+      x_outcome
+      computer
+      o_outcome
+      end
     end
-
   end
 
   def display_board
@@ -35,7 +55,7 @@ class Tictac
   end
 
   def user_one_input
-    print "Player 1: Where would you like to move? (1-9) >> "
+    print "#{@player_one}: Where would you like to move? (1-9) >> "
     response = gets.chomp.to_i
     if @board.include?(response) == false
       puts "Invalid input, please try again."
@@ -50,7 +70,7 @@ class Tictac
   end
 
   def user_two_input
-    print "Player 2: Where would you like to move? (1-9) >> "
+    print "#{@player_two}: Where would you like to move? (1-9) >> "
     response = gets.chomp.to_i
     if @board.include?(response) == false
       puts "Invalid input, please try again."
@@ -70,6 +90,7 @@ class Tictac
     puts ">>>>>>>>>>>>>>>>>>>| Moves = #{@moves}|<<<<<<<<<<<<<<<<<<<"
     puts "                   ------------"
     if @moves >= 9
+      puts = "There is no winner."
       game_over
     end
   end
@@ -86,42 +107,42 @@ class Tictac
 
       if sum1 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum2 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum3 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum4 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum5 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum6 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum7 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
       if sum8 == 150
         display_board
-        puts "\n                  Player 1 Wins"
+        puts "\n                  #{@player_one} Wins"
         game_over
       end
 
@@ -139,42 +160,42 @@ class Tictac
 
       if sum1 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum2 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum3 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum4 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum5 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum6 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum7 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
       if sum8 == 300
         display_board
-        puts "\n                  Player 2 Wins"
+        puts "\n                  #{@player_two} Wins"
         game_over
       end
   end
@@ -184,6 +205,19 @@ class Tictac
     puts "                 ^^^^Goodbye^^^^"
     system(exit)
   end
+
+  def computer
+    computer_pick = @board.sample
+    if @computer_board.include?(computer_pick) == true
+      @board.insert(computer_pick, :o).delete(computer_pick)
+      @board_value.insert(computer_pick, 100).delete(computer_pick)
+      display_board
+      move_counter
+    else
+      computer
+    end
+  end
+
 
 end
 
