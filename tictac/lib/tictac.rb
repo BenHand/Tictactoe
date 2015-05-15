@@ -3,8 +3,8 @@ class Tictac
 # attr_accessor :board
 
   def initialize
-    @board = [0,1,2,3,4,5,6,7,8]
-    @board_value = [0,1,2,3,4,5,6,7,8]
+    @board = [1,2,3,4,5,6,7,8,9]
+    @board_value = [1,2,3,4,5,6,7,8,9]
   end
 
   def lets_play
@@ -22,21 +22,21 @@ class Tictac
 
   def display_board
     puts "\n\n"
-    print "      Tic-Tac-Toe\n"
-    print "     _____________\n"
-    print "      |#{@board[0, 3].join(' | ')}", "|\n"
-    print "      |","-"*9,"|\n"
-    print "      |#{@board[3, 3].join(' | ')}", "|\n"
-    print "      |","-"*9,"|\n"
-    print "      |#{@board[6, 3].join(' | ')}", "|\n"
-    print "      ==========="
+    print "                   Tic-Tac-Toe\n"
+    print "                  _____________\n"
+    print "                   |#{@board[0, 3].join(' | ')}", "|\n"
+    print "                   |","-"*9,"|\n"
+    print "                   |#{@board[3, 3].join(' | ')}", "|\n"
+    print "                   |","-"*9,"|\n"
+    print "                   |#{@board[6, 3].join(' | ')}", "|\n"
+    print "                   ==========="
     puts "\n\n"
     # print @board_value # displays changed values for testing purposes
   end
 
   def user_one_input
-    print "Player 1: Where would you like to move? (0-8) >> "
-    response = gets.to_i
+    print "Player 1: Where would you like to move? (1-9) >> "
+    response = gets.chomp.to_i
     if @board.include?(response) == false
       puts "Invalid input, please try again."
       user_one_input
@@ -50,8 +50,8 @@ class Tictac
   end
 
   def user_two_input
-    print "Player 2: Where would you like to move? (0-8) >> "
-    response = gets.to_i
+    print "Player 2: Where would you like to move? (1-9) >> "
+    response = gets.chomp.to_i
     if @board.include?(response) == false
       puts "Invalid input, please try again."
       user_two_input
@@ -66,9 +66,9 @@ class Tictac
   def move_counter
     @moves += 1
     puts "\n"
-    puts "      ------------"
-    puts "      | Moves = #{@moves}|"
-    puts "      ------------"
+    puts "                   ------------"
+    puts ">>>>>>>>>>>>>>>>>>>| Moves = #{@moves}|<<<<<<<<<<<<<<<<<<<"
+    puts "                   ------------"
     if @moves >= 9
       game_over
     end
@@ -85,43 +85,43 @@ class Tictac
     sum8 = @board_value[6]+@board_value[4]+@board_value[2]
 
       if sum1 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum2 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum3 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum4 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum5 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum6 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum7 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
       if sum8 == 150
-        puts "\n      Player 1 Wins"
         display_board
+        puts "\n                  Player 1 Wins"
         game_over
       end
 
@@ -181,7 +181,7 @@ class Tictac
 
   def game_over
     puts "\n\n>>>>>>>>>>>>>>>>>>>>Game over<<<<<<<<<<<<<<<<<<<<<\n"
-    puts "                 ^^^Good--bye^^^"
+    puts "                 ^^^^Goodbye^^^^"
     system(exit)
   end
 
