@@ -1,3 +1,3 @@
-grequire_relative '../lib/tictac'
+require_relative '../lib/tictac'
 
 Tictac.new.lets_play
