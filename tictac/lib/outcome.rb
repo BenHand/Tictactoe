@@ -1,5 +1,6 @@
 # require 'tictac'
 # class Outcome
+#   attr_accessor
 
 #   def x_outcome
 #     sum1 = @board_value[0]+@board_value[1]+@board_value[2]

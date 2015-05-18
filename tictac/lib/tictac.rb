@@ -91,7 +91,19 @@ class Tictac
     puts "                   ------------"
     if @moves >= 9
       puts = "There is no winner."
-      game_over
+      replay?
+    end
+  end
+
+  def computer
+    computer_pick = @board.sample
+    if @computer_board.include?(computer_pick) == true
+      @board.insert(computer_pick, :o).delete(computer_pick)
+      @board_value.insert(computer_pick, 100).delete(computer_pick)
+      display_board
+      move_counter
+    else
+      computer
     end
   end
 
@@ -108,42 +120,42 @@ class Tictac
       if sum1 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum2 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum3 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum4 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum5 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum6 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum7 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
       if sum8 == 150
         display_board
         puts "\n                  #{@player_one} Wins"
-        game_over
+        replay?
       end
 
   end
@@ -161,43 +173,53 @@ class Tictac
       if sum1 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum2 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum3 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum4 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum5 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum6 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum7 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
       if sum8 == 300
         display_board
         puts "\n                  #{@player_two} Wins"
-        game_over
+        replay?
       end
+  end
+
+  def replay?
+    puts "Would you like to play again? (y/n) >> "
+    response = gets.chomp
+    if response == 'y'
+      Tictac.new.lets_play
+    else
+      game_over
+    end
   end
 
   def game_over
@@ -205,19 +227,6 @@ class Tictac
     puts "                 ^^^^Goodbye^^^^"
     system(exit)
   end
-
-  def computer
-    computer_pick = @board.sample
-    if @computer_board.include?(computer_pick) == true
-      @board.insert(computer_pick, :o).delete(computer_pick)
-      @board_value.insert(computer_pick, 100).delete(computer_pick)
-      display_board
-      move_counter
-    else
-      computer
-    end
-  end
-
 
 end
 
