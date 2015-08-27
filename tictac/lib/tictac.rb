@@ -1,4 +1,5 @@
 # require_relative 'outcome'
+require 'pry'
 class Tictac
 # attr_accessor :board
 
@@ -11,14 +12,11 @@ class Tictac
   end
 
   def lets_play
-      @moves = 0
-      puts "2 Player mode? (y/n)"
-      response = gets.chomp
-      case response
-      when 'y'
-      else
-      end
-    if response == 'y'
+    @moves = 0
+    puts "2 Player mode? (y/n)"
+    response = gets.chomp
+    case response
+    when 'y'
       player_one_name
       player_two_name
 
@@ -29,7 +27,6 @@ class Tictac
         user_two_input
         o_outcome
       end
-
     else
       player_one_name
       @player_two = "Computer"
@@ -41,7 +38,6 @@ class Tictac
         computer
         o_outcome
       end
-
     end
   end
 
@@ -76,12 +72,15 @@ class Tictac
       puts "Invalid input, please try again."
       user_one_input
     else
-      @board.insert(response, :x).delete(response)
-      @board_value.insert(response, 50).delete(response)
+      place_move(response, :x, 50)
       display_board
       move_counter
     end
+  end
 
+  def place_move(pick, sym, value)
+    @board.insert(pick, sym).delete(pick)
+    @board_value.insert(pick, value).delete(pick)
   end
 
   def user_two_input
@@ -91,8 +90,7 @@ class Tictac
       puts "Invalid input, please try again."
       user_two_input
     else
-      @board.insert(response, :o).delete(response)
-      @board_value.insert(response, 100).delete(response)
+      place_move(response, :o, 100)
       display_board
       move_counter
     end
@@ -113,8 +111,7 @@ class Tictac
   def computer
     computer_pick = @board.sample
     if @computer_board.include?(computer_pick) == true
-      @board.insert(computer_pick, :o).delete(computer_pick)
-      @board_value.insert(computer_pick, 100).delete(computer_pick)
+      place_move(computer_pick, :o, 100)
       display_board
       move_counter
     else
@@ -123,16 +120,7 @@ class Tictac
   end
 
   def x_outcome
-    sum1 = @board_value[0]+@board_value[1]+@board_value[2]
-    sum2 = @board_value[3]+@board_value[4]+@board_value[5]
-    sum3 = @board_value[6]+@board_value[7]+@board_value[8]
-    sum4 = @board_value[0]+@board_value[3]+@board_value[6]
-    sum5 = @board_value[1]+@board_value[4]+@board_value[7]
-    sum6 = @board_value[2]+@board_value[5]+@board_value[8]
-    sum7 = @board_value[0]+@board_value[4]+@board_value[8]
-    sum8 = @board_value[6]+@board_value[4]+@board_value[2]
-    outcomes = [sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8]
-    outcomes.each do |sum|
+    possible_outcomes.each do |sum|
       if sum == 150
         display_board
         puts "\n                  #{@player_one} Wins"
@@ -142,7 +130,7 @@ class Tictac
     end
   end
 
-  def o_outcome
+  def possible_outcomes
     sum1 = @board_value[0]+@board_value[1]+@board_value[2]
     sum2 = @board_value[3]+@board_value[4]+@board_value[5]
     sum3 = @board_value[6]+@board_value[7]+@board_value[8]
@@ -152,7 +140,10 @@ class Tictac
     sum7 = @board_value[0]+@board_value[4]+@board_value[8]
     sum8 = @board_value[6]+@board_value[4]+@board_value[2]
     outcomes = [sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8]
-    outcomes.each do |sum|
+  end
+
+  def o_outcome
+    possible_outcomes.each do |sum|
       if sum == 300
         display_board
         puts "\n                  #{@player_two} Wins"
