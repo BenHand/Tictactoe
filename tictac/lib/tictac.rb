@@ -15,29 +15,37 @@ class Tictac
     @moves = 0
     puts "2 Player mode? (y/n)"
     response = gets.chomp
+
     case response
     when 'y'
       player_one_name
       player_two_name
-
-      while @moves < 9
-        display_board
-        user_one_input
-        x_outcome
-        user_two_input
-        o_outcome
-      end
+      two_player_game
     else
       player_one_name
       @player_two = "Computer"
+      one_player_game
+    end
 
-      while @moves < 9
-        display_board
-        user_one_input
-        x_outcome
-        computer
-        o_outcome
-      end
+  end
+
+  def two_player_game
+    while @moves < 9
+      display_board
+      user_one_input
+      x_outcome
+      user_two_input
+      o_outcome
+    end
+  end
+
+  def one_player_game
+    while @moves < 9
+      display_board
+      user_one_input
+      x_outcome
+      computer
+      o_outcome
     end
   end
 
