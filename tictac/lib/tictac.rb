@@ -14,11 +14,14 @@ class Tictac
       @moves = 0
       puts "2 Player mode? (y/n)"
       response = gets.chomp
+      case response
+      when 'y'
+      else
+      end
     if response == 'y'
-        puts "Player one name please >> "
-        @player_one = gets.chomp.upcase
-        puts "Player two name please >> "
-        @player_two = gets.chomp.upcase
+      player_one_name
+      player_two_name
+
       while @moves < 9
         display_board
         user_one_input
@@ -26,18 +29,30 @@ class Tictac
         user_two_input
         o_outcome
       end
+
     else
-      puts "Player one name please >> "
-      @player_one = gets.chomp.upcase
+      player_one_name
       @player_two = "Computer"
+
       while @moves < 9
-      display_board
-      user_one_input
-      x_outcome
-      computer
-      o_outcome
+        display_board
+        user_one_input
+        x_outcome
+        computer
+        o_outcome
       end
+
     end
+  end
+
+  def player_one_name
+    puts "Player one name please >> "
+    @player_one = gets.chomp.upcase
+  end
+
+  def player_two_name
+    puts "Player two name please >> "
+    @player_two = gets.chomp.upcase
   end
 
   def display_board
@@ -116,48 +131,15 @@ class Tictac
     sum6 = @board_value[2]+@board_value[5]+@board_value[8]
     sum7 = @board_value[0]+@board_value[4]+@board_value[8]
     sum8 = @board_value[6]+@board_value[4]+@board_value[2]
-
-      if sum1 == 150
+    outcomes = [sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8]
+    outcomes.each do |sum|
+      if sum == 150
         display_board
         puts "\n                  #{@player_one} Wins"
         replay?
+        break
       end
-      if sum2 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum3 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum4 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum5 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum6 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum7 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-      if sum8 == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-      end
-
+    end
   end
 
   def o_outcome
@@ -169,47 +151,15 @@ class Tictac
     sum6 = @board_value[2]+@board_value[5]+@board_value[8]
     sum7 = @board_value[0]+@board_value[4]+@board_value[8]
     sum8 = @board_value[6]+@board_value[4]+@board_value[2]
-
-      if sum1 == 300
+    outcomes = [sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8]
+    outcomes.each do |sum|
+      if sum == 300
         display_board
         puts "\n                  #{@player_two} Wins"
         replay?
+        break
       end
-      if sum2 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum3 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum4 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum5 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum6 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum7 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
-      if sum8 == 300
-        display_board
-        puts "\n                  #{@player_two} Wins"
-        replay?
-      end
+    end
   end
 
   def replay?
