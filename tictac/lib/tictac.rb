@@ -70,7 +70,11 @@ class Tictac
     print "                   |#{@board[6, 3].join(' | ')}", "|\n"
     print "                   ==========="
     puts "\n\n"
-    # print @board_value # displays changed values for testing purposes
+  end
+
+  def place_move(pick, sym, value)
+    @board.insert(pick, sym).delete(pick)
+    @board_value.insert(pick, value).delete(pick)
   end
 
   def user_one_input
@@ -84,11 +88,6 @@ class Tictac
       display_board
       move_counter
     end
-  end
-
-  def place_move(pick, sym, value)
-    @board.insert(pick, sym).delete(pick)
-    @board_value.insert(pick, value).delete(pick)
   end
 
   def user_two_input
@@ -127,17 +126,6 @@ class Tictac
     end
   end
 
-  def x_outcome
-    possible_outcomes.each do |sum|
-      if sum == 150
-        display_board
-        puts "\n                  #{@player_one} Wins"
-        replay?
-        break
-      end
-    end
-  end
-
   def possible_outcomes
     sum1 = @board_value[0]+@board_value[1]+@board_value[2]
     sum2 = @board_value[3]+@board_value[4]+@board_value[5]
@@ -148,6 +136,17 @@ class Tictac
     sum7 = @board_value[0]+@board_value[4]+@board_value[8]
     sum8 = @board_value[6]+@board_value[4]+@board_value[2]
     outcomes = [sum1, sum2, sum3, sum4, sum5, sum6, sum7, sum8]
+  end
+
+  def x_outcome
+    possible_outcomes.each do |sum|
+      if sum == 150
+        display_board
+        puts "\n                  #{@player_one} Wins"
+        replay?
+        break
+      end
+    end
   end
 
   def o_outcome
